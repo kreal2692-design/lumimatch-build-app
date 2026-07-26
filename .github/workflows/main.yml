@@ -27,15 +27,12 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-        working-directory: lumimatch-app
 
       - name: Create keystore
         run: echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > android/app/lumimatch-release-key.keystore
-        working-directory: lumimatch-app
 
       - name: Build APK
         run: cd android && ./gradlew assembleRelease --no-daemon
-        working-directory: lumimatch-app
         env:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
@@ -45,4 +42,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: app-release
-          path: lumimatch-app/android/app/build/outputs/apk/release/app-release.apk
+          path: android/app/build/outputs/apk/release/app-release.apk
