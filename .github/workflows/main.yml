@@ -54,10 +54,3 @@ jobs:
           name: lumimatch-release-apk
           path: android/app/build/outputs/apk/release/app-release.apk
           retention-days: 30
-
-      - name: Build Summary
-        if: success()
-        run: |
-          APK_PATH="android/app/build/outputs/apk/release/app-release.apk"
-          echo "✅ APK built successfully!"
-          echo "📦 Size: $(du -h $APK_PATH | cut -f1)"
